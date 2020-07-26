@@ -28,13 +28,20 @@ public class JwtAuthenticationController {
     private JwtUserDetailsService userDetailsService;
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+
+        System.out.println("createAuthenticationToken  111 ");
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+        System.out.println("createAuthenticationToken "+ token );
         return ResponseEntity.ok(new JwtResponse(token));
     }
     private void authenticate(String username, String password) throws Exception {
+        System.out.println("password   "+password);
+        System.out.println("username   "+username);
+
+
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {

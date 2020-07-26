@@ -7,5 +7,6 @@ public class HelloWorldController {
 
 @RequestMapping({ "/hello" })
 public String firstPage() {
+    System.out.println("firstPage qqqq ");
     return "Hello World";
 }}
