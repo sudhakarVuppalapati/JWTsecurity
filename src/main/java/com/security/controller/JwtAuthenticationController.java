@@ -47,6 +47,7 @@ public class JwtAuthenticationController {
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
+            System.out.println("createAuthenticationToken "+ e.getMessage() );
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }

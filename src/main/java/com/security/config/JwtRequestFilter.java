@@ -23,16 +23,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        logger.debug("test in doFilterInternal init ");
+        logger.debug("test in doFilterInternal 333");
         final String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
-        logger.debug("test in doFilterInternal requestTokenHeader "+requestTokenHeader);
+        logger.debug("test in doFilterInternal  "+requestTokenHeader);
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
-            logger.debug("test in doFilterInternal jwtToken  "+jwtToken);
+            logger.debug("test in doFilterInternal  "+requestTokenHeader);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
@@ -59,7 +59,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        logger.debug("test in doFilterInternal username  "+username);
         chain.doFilter(request, response);
     }
 }
